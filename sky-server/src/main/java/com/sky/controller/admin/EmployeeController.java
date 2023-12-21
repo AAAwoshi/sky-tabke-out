@@ -15,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class EmployeeController {
 
         Employee employee = employeeService.login(employeeLoginDTO);
 
-        //登录成功后，生成jwt令牌
+        // 登录成功后，生成jwt令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.EMP_ID, employee.getId());
         String token = JwtUtil.createJWT(
